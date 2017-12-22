@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +60,14 @@ public class StockServiceTest {
     public void getStocksException() throws Exception {
         when(externalApiCall.send(any(OutgoingRequest.class))).thenThrow(StocksException.class);
         stockService.getStocks(tickers, startDate, endDate);
+    }
+    
+    @Test(expected = JSONException.class)
+    public void getStocksWrongJSON() throws Exception {
+        String responseString = "{\"datatable\":{\"data\":[[\"GOOGL\",\"2017-01-03\",800.62,811.435,796.89,808.01,1959033.0";
+        when(externalApiCall.send(any(OutgoingRequest.class))).thenReturn(new ResponseEntity<String>(responseString , HttpStatus.OK));
+        List<Stock> stocks = stockService.getStocks(tickers, startDate, endDate);
+        assertEquals(stocks.size(), 20);
     }
     
     
