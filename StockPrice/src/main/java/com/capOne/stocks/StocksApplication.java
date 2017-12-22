@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableRetry
+//@EnableRetry
 public class StocksApplication {
     private static final Logger log = LoggerFactory.getLogger(StocksApplication.class);
 

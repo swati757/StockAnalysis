@@ -29,14 +29,20 @@ import com.capOne.stocks.util.DateUtil;
 @RequestMapping("/stocks/")
 public class StockPriceController {
 
-    @Autowired
+    private static final String END_DATE = "2017-07-31";
+
+	private static final String START_DATE = "2017-01-01";
+
+	@Autowired
     private StockService stockService;
 
     private static final Logger log = LoggerFactory.getLogger(StockPriceController.class);
 
     @RequestMapping(path = "/average/{tickers}", method = RequestMethod.GET, produces = "application/json")
-    public Map<String, List<AverageStockPrice>> getAverageStockPrice(@PathVariable String[] tickers,
-            @RequestParam String startDate, @RequestParam String endDate)
+    public Map<String, List<AverageStockPrice>> getAverageStockPrice(
+    		@PathVariable String[] tickers,
+            @RequestParam(defaultValue=START_DATE) String startDate,
+            @RequestParam(defaultValue=END_DATE) String endDate)
             throws JSONException, StocksException, ParseException {
         log.info("In Average Stock Price call for " + tickers);
 
@@ -106,8 +112,10 @@ public class StockPriceController {
     }
 
     @RequestMapping(path = "/maxDailyProfit/{tickers}", method = RequestMethod.GET, produces = "application/json")
-    public List<DailyMaxProfit> getMaxDailyProfit(@PathVariable String[] tickers, @RequestParam String startDate,
-            @RequestParam String endDate) throws JSONException, StocksException, ParseException {
+    public List<DailyMaxProfit> getMaxDailyProfit(
+    		@PathVariable String[] tickers, 
+            @RequestParam(defaultValue=START_DATE) String startDate,
+            @RequestParam(defaultValue=END_DATE) String endDate) throws JSONException, StocksException, ParseException {
         log.info("In getMaxDailyProfit");
 
         // validate the input
@@ -122,8 +130,10 @@ public class StockPriceController {
     }
 
     @RequestMapping(path = "/busyDay/{tickers}", method = RequestMethod.GET, produces = "application/json")
-    public List<BusyDay> getBusyDay(@PathVariable String[] tickers, @RequestParam String startDate,
-            @RequestParam String endDate) throws JSONException, StocksException, ParseException {
+    public List<BusyDay> getBusyDay(
+    		@PathVariable String[] tickers, 
+            @RequestParam(defaultValue=START_DATE) String startDate,
+            @RequestParam(defaultValue=END_DATE) String endDate) throws JSONException, StocksException, ParseException {
         log.info("In getMaxDailyProfit");
 
         // validate the input

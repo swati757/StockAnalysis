@@ -60,7 +60,6 @@ public class StockService {
      * @throws ParseException
      */
     @Cacheable
-    // @Retryable(value = {StocksException.class}, maxAttempts = 3)
     public List<Stock> getStocks(String[] tickers, String startDate, String endDate)
             throws StocksException, JSONException, ParseException {
         log.info("in getStocks");
@@ -117,7 +116,7 @@ public class StockService {
      * @return
      * @throws StocksException
      */
-    public Map<String, List<AverageStockPrice>> getAveragePrices(List<Stock> stockList) throws StocksException {
+    public Map<String, List<AverageStockPrice>> getAveragePrices(List<Stock> stockList) {
         log.info("StockService:getAveragePrices");
 
         Map<String, List<AverageStockPrice>> averageStockPriceMap = new HashMap<String, List<AverageStockPrice>>();
