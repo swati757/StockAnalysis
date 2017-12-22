@@ -21,7 +21,7 @@ Then to get started:
 1. Clone the repo
 2. Change directory to StockAnalysis/StockPrice/
 3. Run `mvn clean install`
-4. Start up the microservice with the following command 'java -jar target/stocks-0.0.1-SNAPSHOT.jar' inside the target folder.
+4. Start up the microservice with the following command 'java -jar target/stocks-0.0.1-SNAPSHOT.jar'.
 
 
 ### Description
